@@ -1,18 +1,11 @@
-const modal = document.querySelector("#modal")
-const openModalBtn = document.querySelector("#open-modal-btn")
-const closeModalBtn = document.querySelector("#close-modal-btn")
-const overlay = document.querySelector("#overlay")
+const array = [1, 2, 3, 5]
 
-function removeOpenClass() {
-  modal.classList.remove("open")
-  overlay.classList.remove("open")
+if (array.length == 0) {
+  console.log("empty")
+} else if (array.length < 5) {
+  console.log("small")
+} else if (array.length < 10) {
+  console.log("medium")
+} else {
+  console.log("large")
 }
-
-openModalBtn.addEventListener("click", () => {
-  modal.classList.add("open")
-  overlay.classList.add("open")
-})
-
-closeModalBtn.addEventListener("click", removeOpenClass)
-
-overlay.addEventListener("click", removeOpenClass)
