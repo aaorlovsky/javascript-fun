@@ -14,15 +14,20 @@ form.addEventListener("submit", (e) => {
   let selectedAnswers = Array.from(answers).filter(
     (answer) => answer.checked === true
   )
-  let countOfCorrectAnswers = 0
+  // let countOfCorrectAnswers = 0
   selectedAnswers.forEach((selectedAnswer) => {
     if (selectedAnswer.value === "true") {
       selectedAnswer.closest(".question-item").classList.add("correct")
       selectedAnswer.closest(".question-item").classList.remove("incorrect")
-      countOfCorrectAnswers++
+      // countOfCorrectAnswers++
     }
   })
-  if (countOfCorrectAnswers === 3) {
+
+  const everythingIsCorrect =
+    selectedAnswers.length > 0 &&
+    selectedAnswers.every((answer) => answer.value === "true")
+
+  if (everythingIsCorrect) {
     document.querySelector("#alert").classList.add("active")
 
     setTimeout(() => {
