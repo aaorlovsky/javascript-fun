@@ -1,14 +1,32 @@
-const NOTE_DETAILS = [
-  { note: "C", key: "Z", frequency: 261.626 },
-  { note: "Db", key: "S", frequency: 277.183 },
-  { note: "D", key: "X", frequency: 293.665 },
-  { note: "Eb", key: "D", frequency: 311.127 },
-  { note: "E", key: "C", frequency: 329.628 },
-  { note: "F", key: "V", frequency: 349.228 },
-  { note: "Gb", key: "G", frequency: 369.994 },
-  { note: "G", key: "B", frequency: 391.995 },
-  { note: "Ab", key: "H", frequency: 415.305 },
-  { note: "A", key: "N", frequency: 440 },
-  { note: "Bb", key: "J", frequency: 466.164 },
-  { note: "B", key: "M", frequency: 493.883 }
-]
+const form = document.querySelector("#quiz-form")
+const answers = document.querySelectorAll(".answer")
+const questions = document.querySelectorAll(".question-item")
+const alertDiv = document.querySelector("#alert")
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault()
+
+  answers.forEach((answer) => {
+    answer.closest(".question-item").classList.add("incorrect")
+    answer.closest(".question-item").classList.remove("correct")
+  })
+
+  let selectedAnswers = Array.from(answers).filter(
+    (answer) => answer.checked === true
+  )
+  let countOfCorrectAnswers = 0
+  selectedAnswers.forEach((selectedAnswer) => {
+    if (selectedAnswer.value === "true") {
+      selectedAnswer.closest(".question-item").classList.add("correct")
+      selectedAnswer.closest(".question-item").classList.remove("incorrect")
+      countOfCorrectAnswers++
+    }
+  })
+  if (countOfCorrectAnswers === 3) {
+    document.querySelector("#alert").classList.add("active")
+
+    setTimeout(() => {
+      document.querySelector("#alert").classList.remove("active")
+    }, 1000)
+  }
+})
