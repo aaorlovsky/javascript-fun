@@ -5,11 +5,13 @@ const userName = document.getElementById("username")
 const password = document.getElementById("password")
 const passwordConfirmation = document.getElementById("password-confirmation")
 const terms = document.querySelector("#terms")
+const errors = document.querySelector(".errors")
 
 const errorsList = document.querySelector(".errors-list")
 
 form.addEventListener("submit", (e) => {
   const validationsErrors = []
+  clearErrors()
 
   if (userName.value.length < 6) {
     validationsErrors.push("Username has to be at teast 6 characters long")
@@ -31,14 +33,7 @@ form.addEventListener("submit", (e) => {
   }
 
   if (validationsErrors.length > 0) {
-    validationsErrors.forEach((ve) => {
-      const errorLiElement = document.createElement("li")
-      errorLiElement.innerText = ve
-      errorsList.appendChild(errorLiElement)
-    })
-
-    const errors = document.querySelector(".errors")
-    errors.classList.add("show")
+    showErrors(validationsErrors)
 
     e.preventDefault()
   }
@@ -55,6 +50,11 @@ form.addEventListener("submit", (e) => {
 
 // TODO: Define this function
 function clearErrors() {
+  while (errorsList.lastElementChild) {
+    errorsList.removeChild(errorsList.lastElementChild)
+  }
+
+  errors.classList.remove("show")
   // Loop through all the children of the error-list element and remove them
   // IMPORTANT: This cannot be done with a forEach loop or a normal for loop since as you remove children it will modify the list you are looping over which will not work
   // I recommend using a while loop to accomplish this task
@@ -64,6 +64,13 @@ function clearErrors() {
 
 // TODO: Define this function
 function showErrors(errorMessages) {
+  errorMessages.forEach((ve) => {
+    const errorLiElement = document.createElement("li")
+    errorLiElement.innerText = ve
+    errorsList.appendChild(errorLiElement)
+  })
+
+  errors.classList.add("show")
   // Add each error to the error-list element
   // Make sure to use an li as the element for each error
   // Also, make sure you add the show class to the errors container
