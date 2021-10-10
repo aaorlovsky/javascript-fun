@@ -6,7 +6,6 @@ const password = document.getElementById("password")
 const passwordConfirmation = document.getElementById("password-confirmation")
 const terms = document.querySelector("#terms")
 const errors = document.querySelector(".errors")
-
 const errorsList = document.querySelector(".errors-list")
 
 form.addEventListener("submit", (e) => {
