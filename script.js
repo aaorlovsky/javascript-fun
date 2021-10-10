@@ -24,7 +24,7 @@ form.addEventListener("submit", (e) => {
   })
 
   const everythingIsCorrect =
-    selectedAnswers.length > 0 &&
+    selectedAnswers.length === questions.length &&
     selectedAnswers.every((answer) => answer.value === "true")
 
   if (everythingIsCorrect) {
